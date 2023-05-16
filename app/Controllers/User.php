@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use CodeIgniter\API\ResponseTrait;
 
 class User extends BaseController

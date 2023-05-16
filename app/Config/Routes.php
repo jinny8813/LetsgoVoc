@@ -32,9 +32,9 @@ $routes->set404Override();
 // $routes->get('/', 'Home::index');
 
 $routes->get('/', 'UserLogin::index');
-$routes->get('/home', 'UserLogin::home');
-
 $routes->post('/login', 'UserLogin::login');
+
+$routes->get('/home', 'UserLogin::home',['filter' => 'Auth']);
 
 /*
  * --------------------------------------------------------------------

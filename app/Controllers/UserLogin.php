@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\Controller;
 use App\Models\UserModel;
 
 class UserLogin extends BaseController
@@ -11,7 +12,11 @@ class UserLogin extends BaseController
 
     public function index()
     {
-        return view('pages/visitor_home');
+        if(session()->get('userData')){
+            return redirect()->to("/home");
+        }else{
+            return view('pages/visitor_home');
+        }
     }
 
     public function home()

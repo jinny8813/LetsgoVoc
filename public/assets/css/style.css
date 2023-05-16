@@ -1,0 +1,53 @@
+.img_h {
+  height: 2rem;
+}
+
+header,
+footer {
+  background-color: #214200;
+  color: white;
+}
+header .nav-link,
+footer .nav-link {
+  color: white;
+}
+header .nav-link:hover,
+footer .nav-link:hover {
+  background-color: #6a8824;
+  color: white;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+}
+
+.card {
+  border: none;
+  box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.bg_dark {
+  background-color: #214200;
+}
+
+.bg_light {
+  background-color: #f2f2f2;
+}
+
+.btn {
+  background-color: #daaf45;
+  color: white;
+  border: none;
+}
+
+.btn:hover,
+.btn::after,
+.btn:focus,
+.btn:active:hover {
+  background-color: #c39421;
+  border: none;
+}/*# sourceMappingURL=style.css.map */

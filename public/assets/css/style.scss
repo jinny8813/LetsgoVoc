@@ -1,0 +1,57 @@
+$color-dark: #214200;
+$color-green: #6a8824;
+$color-light: #f2f2f2;
+$color-link: #daaf45;
+$color-link-hover: #c39421;
+
+.img_h {
+  height: 2rem;
+}
+
+header,
+footer {
+  background-color: $color-dark;
+  color: white;
+  .nav-link {
+    color: white;
+    &:hover {
+      background-color: $color-green;
+      color: white;
+    }
+  }
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: white;
+  }
+}
+
+.card {
+  border: none;
+  box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.bg_dark {
+  background-color: $color-dark;
+}
+
+.bg_light {
+  background-color: $color-light;
+}
+
+.btn {
+  background-color: $color-link;
+  color: white;
+  border: none;
+}
+
+.btn:hover,
+.btn::after,
+.btn:focus,
+.btn:active:hover {
+  background-color: $color-link-hover;
+  border: none;
+}

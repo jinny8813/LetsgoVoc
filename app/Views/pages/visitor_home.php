@@ -70,6 +70,8 @@
                                 <button type="submit" name="submit" class="btn">送出</button>
                             </div>
                         </form>
+                        <div class="alert alert-danger text-center my-3 py-3 d-none" id="error">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,9 +121,6 @@
                 </div>
             </div>
 
-            <div class="col-md-8 alert alert-danger text-center my-3 py-3 d-none" id="error">
-            </div>
-
             <div class="col-md-8 my-3" id="istoRegister">
                 <div class="card">
                     <div class="card-body">
@@ -168,15 +167,13 @@
         istoLogin.classList.add('d-none');
       })
 
-    let baseUrl1="http://localhost/GoVoc/login";
+    let baseUrl1="http://localhost/LetsgoVoc/login";
     let loginForm = document.getElementById("loginForm");
     let error = document.getElementById("error");
-    let success = document.getElementById("success");
 
     loginForm.addEventListener("submit",(e) => {
         e.preventDefault();
         error.classList.add('d-none');
-        success.classList.add('d-none');
         let formdata= new FormData(loginForm);
         myLib1.POST(baseUrl1,formdata);
     })
@@ -185,18 +182,21 @@
     POST: (url,formdata) => {
         axios.post(url,formdata)
         .then((response) => {
-            console.log(response.data);
+            window.location.href = `<?= base_url('/home')?>`;
+        }).catch((e) => {
+            error.innerHTML = JSON.stringify(e.response.data);
+            error.classList.remove("d-none");
+            console.log(e.response.data);
         })
     },
     }
 
-    let baseUrl2="http://localhost/GoVoc/register";
+    let baseUrl2="http://localhost/LetsgoVoc/register";
     let registerForm = document.getElementById("registerForm");
 
     registerForm.addEventListener("submit",(e) => {
         e.preventDefault();
         error.classList.add('d-none');
-        success.classList.add('d-none');
         formdata= new FormData(registerForm);
         myLib2.POST(baseUrl2,formdata);
     })
@@ -205,11 +205,7 @@
     POST: (url,formdata) => {
         axios.post(url,formdata)
         .then((response) => {
-            if(response.data.msg=="OK"){
-                success.innerHTML = "註冊成功";
-                success.classList.remove("d-none");
-                window.location.href = `<?= base_url('/')?>`;
-            }else{
+            if(response.data!="OK"){
                 error.innerHTML = response.data.msg;
                 error.classList.remove("d-none");
             }

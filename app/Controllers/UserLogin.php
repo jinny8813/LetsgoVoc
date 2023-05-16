@@ -11,16 +11,16 @@ class UserLogin extends BaseController
 
     public function index()
     {
-        if(session()->get('userData')){
+        if(session()->get('userData')) {
             return redirect()->to("/home");
-        }else{
+        } else {
             return view('pages/visitor_home');
         }
     }
 
     public function home()
     {
-        return view('pages/user_home',session()->userData);
+        return view('pages/user_home', session()->userData);
     }
 
     public function login()
@@ -30,17 +30,17 @@ class UserLogin extends BaseController
 
         $email = $data['email'];
         $password = $data['password'];
-        if($email == null || $password == null){
+        if($email == null || $password == null) {
             return $this->response->setStatusCode(400)->setJSON("需帳號密碼進行登入");
         }
 
         $userModel = new UserModel();
-        $userData = $userModel->where("email",$email)->where("password",$password)->first();
-        
-        if($userData){
-            session()->set("userData",$userData);
+        $userData = $userModel->where("email", $email)->where("password", $password)->first();
+
+        if($userData) {
+            session()->set("userData", $userData);
             return $this->response->setStatusCode(200)->setJSON("OK");
-        }else{
+        } else {
             return $this->response->setStatusCode(400)->setJSON("帳號密碼錯誤");
         }
     }

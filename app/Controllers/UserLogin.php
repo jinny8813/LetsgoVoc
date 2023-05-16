@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
-use CodeIgniter\Controller;
 use App\Models\UserModel;
 
 class UserLogin extends BaseController
@@ -21,7 +20,7 @@ class UserLogin extends BaseController
 
     public function home()
     {
-        return view('pages/user_home');
+        return view('pages/user_home',session()->userData);
     }
 
     public function login()
@@ -44,5 +43,11 @@ class UserLogin extends BaseController
         }else{
             return $this->response->setStatusCode(400)->setJSON("帳號密碼錯誤");
         }
+    }
+
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to("/");
     }
 }

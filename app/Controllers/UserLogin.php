@@ -11,16 +11,11 @@ class UserLogin extends BaseController
 
     public function index()
     {
-        if(session()->get('userData')) {
+        if($this->isLoggedIn) {
             return redirect()->to("/home");
         } else {
             return view('pages/visitor_home');
         }
-    }
-
-    public function home()
-    {
-        return view('pages/user_home', session()->userData);
     }
 
     public function login()
@@ -31,7 +26,7 @@ class UserLogin extends BaseController
         $email = $data['email'];
         $password = $data['password'];
         if($email == null || $password == null) {
-            return $this->response->setStatusCode(400)->setJSON("需帳號密碼進行登入");
+            return $this->fail("需帳號密碼進行登入", 400);
         }
 
         $userModel = new UserModel();
@@ -39,9 +34,10 @@ class UserLogin extends BaseController
 
         if($userData) {
             session()->set("userData", $userData);
-            return $this->response->setStatusCode(200)->setJSON("OK");
+            return $this->respond("OK", 200);
+            ;
         } else {
-            return $this->response->setStatusCode(400)->setJSON("帳號密碼錯誤");
+            return $this->fail("帳號密碼錯誤", 400);
         }
     }
 

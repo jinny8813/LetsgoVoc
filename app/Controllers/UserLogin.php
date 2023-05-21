@@ -21,16 +21,14 @@ class UserLogin extends BaseController
     public function login()
     {
         $request = \Config\Services::request();
-        $data = $request->getPost();
+        $data    = $request->getPost();
 
-        $email = $data['email'];
-        $password = $data['password'];
-        if($email == null || $password == null) {
+        if($data['email'] == null || $data['password'] == null) {
             return $this->fail("需帳號密碼進行登入", 400);
         }
 
         $userModel = new UserModel();
-        $userData = $userModel->getUser($email, $password);
+        $userData  = $userModel->getUser($email, $password);
 
         if($userData) {
             session()->set("userData", $userData);

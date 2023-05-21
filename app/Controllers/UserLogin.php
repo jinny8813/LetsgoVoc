@@ -30,7 +30,7 @@ class UserLogin extends BaseController
         }
 
         $userModel = new UserModel();
-        $userData = $userModel->where("email", $email)->where("password", $password)->first();
+        $userData = $userModel->getUser($email, $password);
 
         if($userData) {
             session()->set("userData", $userData);

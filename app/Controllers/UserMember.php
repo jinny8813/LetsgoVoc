@@ -11,6 +11,6 @@ class UserMember extends BaseController
 
     public function index()
     {
-        return view('pages/user_home', session()->userData);
+        return view('pages/user_home', $this->session->userData);
     }
 }

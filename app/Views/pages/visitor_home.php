@@ -167,50 +167,50 @@
         istoLogin.classList.add('d-none');
       })
 
-    let baseUrl1="http://localhost/LetsgoVoc/login";
+    let baseUrl = "<?= base_url('/login') ?>";
     let loginForm = document.getElementById("loginForm");
     let error = document.getElementById("error");
 
-    loginForm.addEventListener("submit",(e) => {
+    loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
         error.classList.add('d-none');
-        let formdata= new FormData(loginForm);
-        myLib1.POST(baseUrl1,formdata);
+        let formdata = new FormData(loginForm);
+        myLib1.POST(baseUrl1, formdata);
     })
 
     let myLib1 = {
-    POST: (url,formdata) => {
-        axios.post(url,formdata)
-        .then((response) => {
-            window.location.href = `<?= base_url('/home')?>`;
-        }).catch((e) => {
-            error.innerHTML = JSON.stringify(e.response.data);
-            error.classList.remove("d-none");
-            console.log(e.response.data);
-        })
-    },
+        POST: (url,formdata) => {
+            axios.post(url, formdata)
+            .then((response) => {
+                window.location.href = `<?= base_url('/home')?>`;
+            }).catch((e) => {
+                error.innerHTML = JSON.stringify(e.response.data);
+                error.classList.remove("d-none");
+                console.log(e.response.data);
+            })
+        },
     }
 
-    let baseUrl2="http://localhost/LetsgoVoc/register";
+    let baseUrl2 = "<?= base_url('/register') ?>";
     let registerForm = document.getElementById("registerForm");
 
-    registerForm.addEventListener("submit",(e) => {
+    registerForm.addEventListener("submit", (e) => {
         e.preventDefault();
         error.classList.add('d-none');
-        formdata= new FormData(registerForm);
-        myLib2.POST(baseUrl2,formdata);
+        formdata = new FormData(registerForm);
+        myLib2.POST(baseUrl2, formdata);
     })
 
     let myLib2 = {
-    POST: (url,formdata) => {
-        axios.post(url,formdata)
-        .then((response) => {
-            if(response.data!="OK"){
-                error.innerHTML = response.data.msg;
-                error.classList.remove("d-none");
-            }
-        })
-    },
+        POST: (url,formdata) => {
+            axios.post(url, formdata)
+            .then((response) => {
+                if(response.data!="OK"){
+                    error.innerHTML = response.data.msg;
+                    error.classList.remove("d-none");
+                }
+            })
+        },
     }
 </script>
 

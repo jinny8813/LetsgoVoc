@@ -36,13 +36,19 @@ abstract class BaseController extends Controller
      * @var array
      */
     protected $helpers = [];
-    protected $isLoggedIn;
+
+    /**
+     * User log in or not.
+     *
+     * @var boolean
+     */
+    protected bool $isLoggedIn;
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
-    // protected $session;
+    protected $session;
 
     /**
      * Constructor.
@@ -55,10 +61,11 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+        $this->session = \Config\Services::session();
     }
 
     public function __construct()
     {
-        $this->isLoggedIn = session()->get('userData');
+        $this->isLoggedIn = $this->session->get('userData');
     }
 }

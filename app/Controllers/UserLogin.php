@@ -23,17 +23,18 @@ class UserLogin extends BaseController
         $request = \Config\Services::request();
         $data    = $request->getPost();
 
-        if($data['email'] == null || $data['password'] == null) {
+        if(is_null($data['email']) === true || is_null($data['password']) === true) {
             return $this->fail("需帳號密碼進行登入", 400);
         }
 
         $userModel = new UserModel();
-        $userData  = $userModel->getUser($email, $password);
+        $userData  = $userModel->getUser($data['email'], $data['password']);
 
         if($userData) {
-            session()->set("userData", $userData);
-            return $this->respond("OK", 200);
-            ;
+            $this->session->set("userData", $userData);
+            return $this->respond(["status" => true,
+                                    "data"   => $this->session,
+                                    "msg"    => "log in successful"]);
         } else {
             return $this->fail("帳號密碼錯誤", 400);
         }
@@ -41,7 +42,7 @@ class UserLogin extends BaseController
 
     public function logout()
     {
-        session()->destroy();
+        $this->session->destroy();
         return redirect()->to("/");
     }
 }

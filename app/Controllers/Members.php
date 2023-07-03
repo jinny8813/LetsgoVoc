@@ -5,13 +5,13 @@ namespace App\Controllers;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\UserModel;
 
-class UserLogin extends BaseController
+class Members extends BaseController
 {
     use ResponseTrait;
 
     public function index()
     {
-        if($this->isLoggedIn) {
+        if($this->isLoggedIn === true) {
             return redirect()->to("/home");
         } else {
             return view('pages/visitor_home');
@@ -20,21 +20,25 @@ class UserLogin extends BaseController
 
     public function login()
     {
-        $request = \Config\Services::request();
-        $data    = $request->getPost();
+        $data = $this->request->getPost();
 
-        if(is_null($data['email']) === true || is_null($data['password']) === true) {
+        $email    = $data['email'];
+        $password = $data['password'];
+
+        if(is_null($email) === true || is_null($password) === true) {
             return $this->fail("需帳號密碼進行登入", 400);
         }
 
         $userModel = new UserModel();
-        $userData  = $userModel->getUser($data['email'], $data['password']);
+        $userData  = $userModel->where("email", $email)->first();
 
-        if($userData) {
+        if(password_verify($password, $userData['password_hash'])) {
             $this->session->set("userData", $userData);
-            return $this->respond(["status" => true,
-                                    "data"   => $this->session,
-                                    "msg"    => "log in successful"]);
+            return $this->respond(["
+                        status" => true,
+                        "data"   => $this->session,
+                        "msg"    => "log in successful"
+                    ]);
         } else {
             return $this->fail("帳號密碼錯誤", 400);
         }

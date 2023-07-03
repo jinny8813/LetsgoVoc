@@ -167,7 +167,7 @@
         istoLogin.classList.add('d-none');
       })
 
-    let baseUrl = "<?= base_url('/login') ?>";
+    let baseUrl1 = "<?= base_url('/login') ?>";
     let loginForm = document.getElementById("loginForm");
     let error = document.getElementById("error");
 

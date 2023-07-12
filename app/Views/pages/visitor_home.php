@@ -178,19 +178,19 @@
         e.preventDefault();
         error.classList.add('d-none');
         let formdata = new FormData(loginForm);
-        myLibLogin.POST(baseUrlLogin, formdata);
+        loginComponent.POST(baseUrlLogin, formdata);
     })
 
-    let myLibLogin = {
+    let loginComponent = {
         POST: (url,formdata) => {
             axios.post(url, formdata)
             .then((response) => {
                 Swal.fire({
                     icon: 'success',
                     title: '成功',
-                    text: '您好，即將為您轉跳至個人主頁'
+                    text: '即將為您轉跳至個人主頁'
                 }).then(function(result) {
-                    window.location.href = `<?= base_url('/personalhome')?>`;
+                    window.location.href = `<?= base_url('/home')?>`;
                 })
             })
             .catch((error) => {
@@ -211,10 +211,10 @@
         e.preventDefault();
         error.classList.add('d-none');
         formdata = new FormData(registerForm);
-        myLibRegister.POST(baseUrlRegister, formdata);
+        registerComponent.POST(baseUrlRegister, formdata);
     })
 
-    let myLibRegister = {
+    let registerComponent = {
         POST: (url,formdata) => {
             axios.post(url, formdata)
             .then((response) => {

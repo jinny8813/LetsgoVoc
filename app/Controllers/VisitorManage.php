@@ -6,14 +6,14 @@ use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\UserModel;
 
-class Members extends BaseController
+class VisitorManage extends BaseController
 {
     use ResponseTrait;
 
     public function index()
     {
         if($this->session->get("userData") !== null) {
-            return redirect()->to("/personalhome");
+            return redirect()->to("/home");
         } else {
             return view('pages/visitor_home');
         }
@@ -42,9 +42,15 @@ class Members extends BaseController
         }
 
         if(password_verify($password, $userData['password_hash'])) {
-            $this->session->set("userData", $userData);
-            return $this->respond(["
-                status" => true,
+            $this->session->set("userData", [
+                'u_id'      => $userData['u_id'],
+                'email'     => $userData['email'],
+                'nickname'  => $userData['nickname'],
+                'goal'      => $userData['goal'], 
+                'lasting'   => $userData['lasting']
+            ]);
+            return $this->respond([
+                "status" => true,
                 "data"   => $this->session,
                 "msg"    => "登入成功"
             ]);

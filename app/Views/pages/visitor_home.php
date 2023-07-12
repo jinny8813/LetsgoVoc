@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= base_url('../../public/assets/css/style.css') ?>" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.16/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.16/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body class="font-monospace">
 <header>
@@ -148,6 +150,7 @@
     </div>
 </section>
 <script>
+    
     let isLogin = document.getElementById("isLogin");
     let isRegister = document.getElementById("isRegister");
     let istoLogin = document.getElementById("istoLogin");
@@ -167,7 +170,7 @@
         istoLogin.classList.add('d-none');
       })
 
-    let baseUrl1 = "<?= base_url('/login') ?>";
+    let baseUrlLogin = "<?= base_url('/login') ?>";
     let loginForm = document.getElementById("loginForm");
     let error = document.getElementById("error");
 
@@ -175,40 +178,61 @@
         e.preventDefault();
         error.classList.add('d-none');
         let formdata = new FormData(loginForm);
-        myLib1.POST(baseUrl1, formdata);
+        myLibLogin.POST(baseUrlLogin, formdata);
     })
 
-    let myLib1 = {
+    let myLibLogin = {
         POST: (url,formdata) => {
             axios.post(url, formdata)
             .then((response) => {
-                window.location.href = `<?= base_url('/home')?>`;
-            }).catch((e) => {
-                error.innerHTML = JSON.stringify(e.response.data);
-                error.classList.remove("d-none");
-                console.log(e.response.data);
+                Swal.fire({
+                    icon: 'success',
+                    title: '成功',
+                    text: '您好，即將為您轉跳至個人主頁'
+                }).then(function(result) {
+                    window.location.href = `<?= base_url('/personalhome')?>`;
+                })
+            })
+            .catch((error) => {
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: error.response.data.status + ' 錯誤',
+                    text: error.response.data.messages.error
+                })
             })
         },
     }
 
-    let baseUrl2 = "<?= base_url('/register') ?>";
+    let baseUrlRegister = "<?= base_url('/register') ?>";
     let registerForm = document.getElementById("registerForm");
 
     registerForm.addEventListener("submit", (e) => {
         e.preventDefault();
         error.classList.add('d-none');
         formdata = new FormData(registerForm);
-        myLib2.POST(baseUrl2, formdata);
+        myLibRegister.POST(baseUrlRegister, formdata);
     })
 
-    let myLib2 = {
+    let myLibRegister = {
         POST: (url,formdata) => {
             axios.post(url, formdata)
             .then((response) => {
-                if(response.data!="OK"){
-                    error.innerHTML = response.data.msg;
-                    error.classList.remove("d-none");
-                }
+                Swal.fire({
+                    icon: 'success',
+                    title: '成功',
+                    text: '您好，即將為您重新轉跳'
+                }).then(function(result) {
+                    window.location.reload();
+                })
+            })
+            .catch((error) => {
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: error.response.data.status + ' 錯誤',
+                    text: error.response.data.messages.error
+                })
             })
         },
     }

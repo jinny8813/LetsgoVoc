@@ -32,10 +32,12 @@ $routes->set404Override();
 // $routes->get('/', 'Home::index');
 
 $routes->get('/', 'Members::index');
+$routes->get('/login', 'Members::index');
 $routes->post('/login', 'Members::login');
+$routes->post('/register', 'Members::register');
 $routes->get('/logout', 'Members::logout');
 
-$routes->get('/home', 'UserMembers::index', ['filter' => 'AuthFilter']);
+$routes->get('/personalhome', 'MemberManage::index', ['filter' => 'AuthFilter']);
 
 /*
  * --------------------------------------------------------------------

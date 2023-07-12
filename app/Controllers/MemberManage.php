@@ -5,7 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\UserModel;
 
-class UserMembers extends BaseController
+class MemberManage extends BaseController
 {
     use ResponseTrait;
 

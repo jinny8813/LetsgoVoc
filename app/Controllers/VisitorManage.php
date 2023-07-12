@@ -46,7 +46,7 @@ class VisitorManage extends BaseController
                 'u_id'      => $userData['u_id'],
                 'email'     => $userData['email'],
                 'nickname'  => $userData['nickname'],
-                'goal'      => $userData['goal'], 
+                'goal'      => $userData['goal'],
                 'lasting'   => $userData['lasting']
             ]);
             return $this->respond([

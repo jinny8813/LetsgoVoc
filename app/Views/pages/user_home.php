@@ -9,7 +9,7 @@
             <div class="col-md-8 position-absolute top-100 start-50 translate-middle">
                 <div class="card">
                     <div class="card-body">
-                        <div class="text-center fs-3">的個人主頁</div>
+                        <div class="text-center fs-3"><?= esc($nickname)?>的個人主頁</div>
                     </div>
                 </div>
             </div>

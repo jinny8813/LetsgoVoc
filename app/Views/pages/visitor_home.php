@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= base_url('../../public/assets/css/style.css') ?>" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.16/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.16/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body class="font-monospace">
 <header>
@@ -70,6 +72,8 @@
                                 <button type="submit" name="submit" class="btn">送出</button>
                             </div>
                         </form>
+                        <div class="alert alert-danger text-center my-3 py-3 d-none" id="error">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,9 +123,6 @@
                 </div>
             </div>
 
-            <div class="col-md-8 alert alert-danger text-center my-3 py-3 d-none" id="error">
-            </div>
-
             <div class="col-md-8 my-3" id="istoRegister">
                 <div class="card">
                     <div class="card-body">
@@ -149,6 +150,7 @@
     </div>
 </section>
 <script>
+    
     let isLogin = document.getElementById("isLogin");
     let isRegister = document.getElementById("isRegister");
     let istoLogin = document.getElementById("istoLogin");
@@ -168,53 +170,71 @@
         istoLogin.classList.add('d-none');
       })
 
-    let baseUrl1="http://localhost/GoVoc/login";
+    let baseUrlLogin = "<?= base_url('/login') ?>";
     let loginForm = document.getElementById("loginForm");
     let error = document.getElementById("error");
-    let success = document.getElementById("success");
 
-    loginForm.addEventListener("submit",(e) => {
+    loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
         error.classList.add('d-none');
-        success.classList.add('d-none');
-        let formdata= new FormData(loginForm);
-        myLib1.POST(baseUrl1,formdata);
+        let formdata = new FormData(loginForm);
+        loginComponent.POST(baseUrlLogin, formdata);
     })
 
-    let myLib1 = {
-    POST: (url,formdata) => {
-        axios.post(url,formdata)
-        .then((response) => {
-            console.log(response.data);
-        })
-    },
+    let loginComponent = {
+        POST: (url,formdata) => {
+            axios.post(url, formdata)
+            .then((response) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '成功',
+                    text: '即將為您轉跳至個人主頁'
+                }).then(function(result) {
+                    window.location.href = `<?= base_url('/home')?>`;
+                })
+            })
+            .catch((error) => {
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: error.response.data.status + ' 錯誤',
+                    text: error.response.data.messages.error
+                })
+            })
+        },
     }
 
-    let baseUrl2="http://localhost/GoVoc/register";
+    let baseUrlRegister = "<?= base_url('/register') ?>";
     let registerForm = document.getElementById("registerForm");
 
-    registerForm.addEventListener("submit",(e) => {
+    registerForm.addEventListener("submit", (e) => {
         e.preventDefault();
         error.classList.add('d-none');
-        success.classList.add('d-none');
-        formdata= new FormData(registerForm);
-        myLib2.POST(baseUrl2,formdata);
+        formdata = new FormData(registerForm);
+        registerComponent.POST(baseUrlRegister, formdata);
     })
 
-    let myLib2 = {
-    POST: (url,formdata) => {
-        axios.post(url,formdata)
-        .then((response) => {
-            if(response.data.msg=="OK"){
-                success.innerHTML = "註冊成功";
-                success.classList.remove("d-none");
-                window.location.href = `<?= base_url('/')?>`;
-            }else{
-                error.innerHTML = response.data.msg;
-                error.classList.remove("d-none");
-            }
-        })
-    },
+    let registerComponent = {
+        POST: (url,formdata) => {
+            axios.post(url, formdata)
+            .then((response) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '成功',
+                    text: '您好，即將為您重新轉跳'
+                }).then(function(result) {
+                    window.location.reload();
+                })
+            })
+            .catch((error) => {
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: error.response.data.status + ' 錯誤',
+                    text: error.response.data.messages.error
+                })
+            })
+        },
     }
 </script>
 

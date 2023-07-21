@@ -64,4 +64,52 @@ class VisitorManage extends BaseController
         $this->session->destroy();
         return redirect()->to("/");
     }
+
+    public function register()
+    {
+        date_default_timezone_set('Asia/Taipei');
+        $date = date('Y-m-d H:i:s');
+
+        $data = $this->request->getPost();
+
+        $email      = $data['email'];
+        $password   = $data['password'];
+        $cpassword  = $data['cpassword'];
+        $nickname   = $data['nickname'];
+
+        if($email === null || $password === null || $cpassword === null || $nickname === null) {
+            return $this->fail("需帳號密碼進行註冊", 404);
+        }
+
+        if($email === " " || $password === " " || $cpassword === " " || $nickname === " ") {
+            return $this->fail("需帳號密碼進行註冊", 404);
+        }
+
+        if($password != $cpassword) {
+            return $this->fail("密碼驗證錯誤", 403);
+        }
+
+        $userModel = new UserModel();
+        $userData  = $userModel->where("email", $email)->first();
+
+        if($userData != null) {
+            return $this->fail("帳號已被註冊", 403);
+        }
+
+        $values = [
+            'email'         =>  $email,
+            'password_hash' =>  password_hash($password, PASSWORD_DEFAULT),
+            'nickname'      =>  $nickname,
+            'create_at'     =>  $date,
+            'uuidv4'        =>  $this->guidv4(),
+            'goal'          =>  0,
+            'lasting'       =>  30,
+        ];
+        $userModel->insert($values);
+
+        return $this->respond([
+            "status" => true,
+            "msg"    => "登入成功"
+        ]);
+    }
 }

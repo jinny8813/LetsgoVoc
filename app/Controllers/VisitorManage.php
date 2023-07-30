@@ -67,9 +67,6 @@ class VisitorManage extends BaseController
 
     public function register()
     {
-        date_default_timezone_set('Asia/Taipei');
-        $date = date('Y-m-d H:i:s');
-
         $data = $this->request->getPost();
 
         $email      = $data['email'];
@@ -100,8 +97,8 @@ class VisitorManage extends BaseController
             'email'         =>  $email,
             'password_hash' =>  password_hash($password, PASSWORD_DEFAULT),
             'nickname'      =>  $nickname,
-            'create_at'     =>  $date,
-            'uuidv4'        =>  $this->guidv4(),
+            'create_at'     =>  date('Y-m-d H:i:s'),
+            'uuidv4'        =>  $this->getUuid(),
             'goal'          =>  0,
             'lasting'       =>  30,
         ];

@@ -64,7 +64,13 @@ abstract class BaseController extends Controller
         $this->session = \Config\Services::session();
     }
 
-    public function guidv4($data = null)
+    /**
+     * to generate Universally Unique Identifier
+     *
+     * @param null
+     * @return string
+     */
+    public function getUuid($data = null)
     {
         $data = $data ?? random_bytes(16);
         assert(strlen($data) == 16);

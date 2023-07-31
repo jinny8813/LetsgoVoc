@@ -6,14 +6,14 @@ use CodeIgniter\Model;
 
 class BooksModel extends Model
 {
-    protected $table            = 'users';
+    protected $table            = 'books';
     protected $primaryKey       = 'b_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'b_id', 'uuidv4', 'u_id', 'title', 'discription', 'manifest', 'created_at', 'updated_at', 'deleted_at'
+        'b_id', 'uuidv4', 'u_id', 'title', 'description', 'manifest', 'created_at', 'updated_at', 'deleted_at'
     ];
 
     // Dates

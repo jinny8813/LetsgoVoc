@@ -37,8 +37,11 @@ $routes->post('/login', 'VisitorManage::login');
 $routes->post('/register', 'VisitorManage::register');
 $routes->get('/logout', 'VisitorManage::logout');
 
-$routes->get('/home', 'MemberManage::index', ['filter' => 'AuthFilter']);
+$routes->group('/', ['filter' => 'AuthFilter'], function ($routes) {
+    $routes->get('/home', 'MemberManage::index');
 
+    $routes->get('/books', 'BookList::index');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

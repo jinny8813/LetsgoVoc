@@ -194,7 +194,6 @@
                 })
             })
             .catch((error) => {
-                console.log(error);
                 Swal.fire({
                     icon: 'error',
                     title: error.response.data.status + ' 錯誤',
@@ -227,7 +226,6 @@
                 })
             })
             .catch((error) => {
-                console.log(error);
                 Swal.fire({
                     icon: 'error',
                     title: error.response.data.status + ' 錯誤',

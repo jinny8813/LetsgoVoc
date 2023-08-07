@@ -43,6 +43,7 @@ $routes->group('/', ['filter' => 'AuthFilter'], function ($routes) {
     $routes->get('/books', 'BookList::index');
     $routes->get('/books/new', 'BookList::renderCreatePage');
     $routes->post('/books', 'BookList::create');
+    $routes->get('/books/(:num)', 'BookList::perBook/$1');
 });
 /*
  * --------------------------------------------------------------------

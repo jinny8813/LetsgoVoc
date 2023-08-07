@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
 use App\Models\BooksModel;
+use App\Models\CardsModel;
 
 class BookList extends BaseController
 {
@@ -64,5 +65,23 @@ class BookList extends BaseController
             "status" => true,
             "msg"    => "書本建立成功"
         ]);
+    }
+
+    public function perBook($b_id)
+    {
+        $userData = $this->session->userData;
+        $u_id        = $userData['u_id'];
+
+        $booksModel = new BooksModel();
+        $data['book'] = $booksModel->where("b_id", $b_id)->first();
+
+        $cardsModel = new CardsModel();
+        $data['cards'] = $cardsModel ->join('state', 'cards.c_id = state.c_id')
+                                    ->where('cards.b_id', $b_id)
+                                    ->where('state.u_id', $u_id)
+                                    ->orderBy('cards.c_id', 'DESC')
+                                    ->findAll();
+
+        return view('pages/perbook_list', $data);
     }
 }

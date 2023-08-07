@@ -15,17 +15,16 @@ class BookList extends BaseController
 
         $u_id = $userData['u_id'];
 
-        $db = \Config\Database::connect();
-        $temp =  "
-                    SELECT b.*,count(c.c_id) count, AVG(s.state) avg
-                    FROM books b
-                    LEFT JOIN cards c ON b.b_id = c.b_id
-                    LEFT JOIN state s ON c.c_id = s.c_id
-                    WHERE b.u_id = {$u_id}
-                    GROUP BY b.b_id
-                    ORDER BY b.b_id DESC;
-                ";
-        $data['books'] = $db->query($temp)->getResultArray();
+        $booksModel = new BooksModel();
+        $data['books'] = $booksModel ->select('books.*')
+                                    ->selectCount('cards.c_id', 'count')
+                                    ->selectAvg('state.state', 'avg')
+                                    ->join('cards', 'books.b_id = cards.b_id', 'left')
+                                    ->join('state', 'cards.c_id = state.c_id', 'left')
+                                    ->where('books.u_id', $u_id)
+                                    ->groupBy('books.b_id')
+                                    ->orderBy('books.b_id', 'DESC')
+                                    ->findAll();
 
         return view('pages/book_list', $data);
     }

@@ -1,7 +1,7 @@
 <header class="sticky-top">
   <nav class="navbar navbar-expand-lg p-0">
       <div class="img_h">
-        <a class="navbar-brand p-3" href="<?= base_url('/')?>" style="color:white"
+        <a class="navbar-brand p-3" href="<?= base_url('/home')?>" style="color:white"
           ><img src="<?= base_url('../../public/assets/images/icon.png') ?>" class="h-100 px-2" />LetsgoVoc
         </a>
       </div>

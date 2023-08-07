@@ -41,8 +41,8 @@ $routes->group('/', ['filter' => 'AuthFilter'], function ($routes) {
     $routes->get('/home', 'MemberManage::index');
 
     $routes->get('/books', 'BookList::index');
-    $routes->get('/books/new', 'BookList::create');
-    $routes->post('/books', 'BookList::store');
+    $routes->get('/books/new', 'BookList::renderCreatePage');
+    $routes->post('/books', 'BookList::create');
 });
 /*
  * --------------------------------------------------------------------

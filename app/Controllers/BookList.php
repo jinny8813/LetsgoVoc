@@ -30,19 +30,19 @@ class BookList extends BaseController
         return view('pages/book_list', $data);
     }
 
-    public function create()
+    public function renderCreatePage()
     {
         return view('pages/book_create');
     }
 
-    public function store()
+    public function create()
     {
         $data = $this->request->getPost();
         $userData = $this->session->userData;
 
-        $u_id           =   $userData['u_id'];
-        $title          =   $data['title'];
-        $description    =   $data['description'];
+        $u_id        = $userData['u_id'];
+        $title       = $data['title'];
+        $description = $data['description'];
 
         if($title === null || $description === null) {
             return $this->fail("需帳號密碼進行註冊", 404);
@@ -53,10 +53,10 @@ class BookList extends BaseController
         }
 
         $values = [
-            'u_id'          =>  $u_id,
-            'title'         =>  $title,
-            'description'   =>  $description,
-            'uuidv4'        =>  $this->getUuid(),
+            'u_id'        => $u_id,
+            'title'       => $title,
+            'description' => $description,
+            'uuidv4'      => $this->getUuid(),
         ];
         $booksModel = new BooksModel();
         $booksModel->insert($values);

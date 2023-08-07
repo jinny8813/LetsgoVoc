@@ -1,8 +1,10 @@
-$color-dark: #214200;
-$color-green: #6a8824;
-$color-light: #f2f2f2;
-$color-link: #daaf45;
-$color-link-hover: #c39421;
+$color-dark: #2c4c01;
+$color-green: #628100;
+$color-light: #e8e8e8;
+$color-link: #dfc403;
+$color-link-hover: #c3ac00;
+$color-light-blue: #c9d1d4;
+$color-dark-blue: #505c58;
 
 .img_h {
   height: 2rem;
@@ -21,11 +23,26 @@ footer {
   }
 }
 
-a {
+.ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.a_white {
   color: white;
   text-decoration: none;
   &:hover {
     color: white;
+  }
+}
+
+.a_black {
+  color: black;
+  text-decoration: none;
+  &:hover {
+    color: black;
   }
 }
 
@@ -42,10 +59,23 @@ a {
   background-color: $color-light;
 }
 
+.bg_green {
+  background-color: $color-green;
+  color: white;
+  border-radius: 0 0 50px 0;
+  box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.bg_dark_blue {
+  background-color: $color-dark-blue;
+  color: white;
+}
+
 .btn {
   background-color: $color-link;
   color: white;
   border: none;
+  box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
 .btn:hover,
@@ -55,4 +85,85 @@ a {
   background-color: $color-link-hover;
   color: white;
   border: none;
+}
+
+.btn_low_key {
+  background-color: transparent;
+  color: white;
+  border: none;
+  box-shadow: none;
+  &:hover,
+  &:active,
+  &:focus,
+  &::after,
+  &:active:hover {
+    background-color: transparent;
+  }
+}
+
+.btn_the_biggest {
+  height: 50px;
+  width: 50px;
+  margin-bottom: 5px;
+  border-radius: 25px 0 25px 25px;
+  box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.btn_biggest_down {
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+  border-radius: 20px;
+  box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.showCards {
+  height: 60vh;
+}
+
+.card-inner {
+  perspective: 1000px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.input_card {
+  border: none;
+  box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+.dot {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 1.25rem;
+  padding-top: 0.3rem;
+  border: solid #7781de;
+}
+
+.dot-fill {
+  background-color: #7781de;
+  color: white;
 }

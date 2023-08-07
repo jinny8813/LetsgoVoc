@@ -4,7 +4,7 @@
 
 header,
 footer {
-  background-color: #214200;
+  background-color: #2c4c01;
   color: white;
 }
 header .nav-link,
@@ -13,16 +13,31 @@ footer .nav-link {
 }
 header .nav-link:hover,
 footer .nav-link:hover {
-  background-color: #6a8824;
+  background-color: #628100;
   color: white;
 }
 
-a {
+.ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.a_white {
   color: white;
   text-decoration: none;
 }
-a:hover {
+.a_white:hover {
   color: white;
+}
+
+.a_black {
+  color: black;
+  text-decoration: none;
+}
+.a_black:hover {
+  color: black;
 }
 
 .card {
@@ -31,24 +46,114 @@ a:hover {
 }
 
 .bg_dark {
-  background-color: #214200;
+  background-color: #2c4c01;
 }
 
 .bg_light {
-  background-color: #f2f2f2;
+  background-color: #e8e8e8;
+}
+
+.bg_green {
+  background-color: #628100;
+  color: white;
+  border-radius: 0 0 50px 0;
+  box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.bg_dark_blue {
+  background-color: #505c58;
+  color: white;
 }
 
 .btn {
-  background-color: #daaf45;
+  background-color: #dfc403;
   color: white;
   border: none;
+  box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
 .btn:hover,
 .btn::after,
 .btn:focus,
 .btn:active:hover {
-  background-color: #c39421;
+  background-color: #c3ac00;
   color: white;
   border: none;
+}
+
+.btn_low_key {
+  background-color: transparent;
+  color: white;
+  border: none;
+  box-shadow: none;
+}
+.btn_low_key:hover, .btn_low_key:active, .btn_low_key:focus, .btn_low_key::after, .btn_low_key:active:hover {
+  background-color: transparent;
+}
+
+.btn_the_biggest {
+  height: 50px;
+  width: 50px;
+  margin-bottom: 5px;
+  border-radius: 25px 0 25px 25px;
+  box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.btn_biggest_down {
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+  border-radius: 20px;
+  box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.showCards {
+  height: 60vh;
+}
+
+.card-inner {
+  perspective: 1000px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.input_card {
+  border: none;
+  box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dot {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 1.25rem;
+  padding-top: 0.3rem;
+  border: solid #7781de;
+}
+
+.dot-fill {
+  background-color: #7781de;
+  color: white;
 }/*# sourceMappingURL=style.css.map */

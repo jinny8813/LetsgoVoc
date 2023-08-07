@@ -31,19 +31,19 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-6" style="background-color:#2c4c01">
-                <div class="text-center fs-5 py-5"><a href="#">書本列表</a></div>
+                <div class="text-center fs-5 py-5"><a class="a_white" href="<?= base_url('/books') ?>">書本列表</a></div>
             </div>
             <div class="col-md-3 col-6" style="background-color:#628100">
-                <div class="text-center fs-5 py-5"><a href="#">所有字卡</a></div>
+                <div class="text-center fs-5 py-5"><a class="a_white" href="#">所有字卡</a></div>
             </div>
             <div class="col-md-3 col-12" style="background-color:#dfc403">
-                <div class="text-center fs-5 py-5"><a href="#">翻卡測驗</a></div>
+                <div class="text-center fs-5 py-5"><a class="a_white" href="#">翻卡測驗</a></div>
             </div>
             <div class="col-md-4 col-6" style="background-color:#c9d1d4">
-                <div class="text-center fs-5 py-5"><a href="#">統計分析</a></div>
+                <div class="text-center fs-5 py-5"><a class="a_white" href="#">統計分析</a></div>
             </div>
             <div class="col-md-8 col-6" style="background-color:#505c58">
-                <div class="text-center fs-5 py-5"><a href="#">個人設定</a></div>
+                <div class="text-center fs-5 py-5"><a class="a_white" href="#">個人設定</a></div>
             </div>
         </div>
     </div>

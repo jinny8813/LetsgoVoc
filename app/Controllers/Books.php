@@ -76,10 +76,10 @@ class Books extends BaseController
 
         if($bookData === null) {
             return redirect()->to("/books");
-        }else{
+        } else {
             $this->session->set("bookData", $bookData);
         }
-        
+
         $u_id = $userData['u_id'];
         $b_id = $bookData['b_id'];
 

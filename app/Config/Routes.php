@@ -46,6 +46,8 @@ $routes->group('/', ['filter' => 'AuthFilter'], function ($routes) {
     $routes->get('/books/new', 'Books::renderCreatePage');
     $routes->post('/books', 'Books::create');
     $routes->get('/perbook/(:uuid)', 'Books::perBook/$1');
+
+    $routes->get('/perbook/new', 'Cards::renderCreatePage');
 });
 /*
  * --------------------------------------------------------------------

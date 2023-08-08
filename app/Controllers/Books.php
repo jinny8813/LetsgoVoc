@@ -6,7 +6,7 @@ use CodeIgniter\API\ResponseTrait;
 use App\Models\BooksModel;
 use App\Models\CardsModel;
 
-class BookList extends BaseController
+class Books extends BaseController
 {
     use ResponseTrait;
 
@@ -67,13 +67,21 @@ class BookList extends BaseController
         ]);
     }
 
-    public function perBook($b_id)
+    public function perBook($uuidv4)
     {
         $userData = $this->session->userData;
-        $u_id        = $userData['u_id'];
 
         $booksModel = new BooksModel();
-        $data['book'] = $booksModel->where("b_id", $b_id)->first();
+        $bookData = $booksModel->where("uuidv4", $uuidv4)->first();
+
+        if($bookData === null) {
+            return redirect()->to("/books");
+        }else{
+            $this->session->set("bookData", $bookData);
+        }
+        
+        $u_id = $userData['u_id'];
+        $b_id = $bookData['b_id'];
 
         $cardsModel = new CardsModel();
         $data['cards'] = $cardsModel ->join('state', 'cards.c_id = state.c_id')
@@ -82,6 +90,6 @@ class BookList extends BaseController
                                     ->orderBy('cards.c_id', 'DESC')
                                     ->findAll();
 
-        return view('pages/perbook_list', $data);
+        return view('pages/perbook_list', $data + $bookData);
     }
 }

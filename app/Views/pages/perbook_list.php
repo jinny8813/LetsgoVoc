@@ -11,7 +11,7 @@
                     <a href="#" class="btn btn_low_key p-0"><i class="fa-fw fa-solid fa-info"></i></a>
                 </div>
                 <div class="col-8 p-3">
-                    <div class="fs-3 text-center"><?= $book['title'] ?></div>
+                    <div class="fs-3 text-center"><?= $title ?></div>
                 </div>
                 <div class="col-1">
                 </div>
@@ -22,7 +22,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6 col-10 pb-4">
-                <div class="ellipsis"><?= $book['description'] ?></div>
+                <div class="ellipsis"><?= $description ?></div>
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-10 card-body">
                             <div class="fs-5">
-                                <strong><a href="" class="a_black stretched-link"><?= $row['title']?></a></strong> <small>(<?= $row['part_of_speech']?>.)</small>
+                                <strong><a href="<?= base_url('percard/'.$row['uuidv4'])?>" class="a_black stretched-link"><?= $row['title']?></a></strong> <small>(<?= $row['part_of_speech']?>.)</small>
                             </div>
                         </div>
                     </div>

@@ -161,10 +161,10 @@
     document.getElementById("cardSearchForm").addEventListener("submit",(e) => {
         e.preventDefault();
         let formdata= new FormData(cardSearchForm);
-        myLib1.POST("<?= base_url('/perbook/dictionary') ?>",formdata);
+        dictionaryComponent.POST("<?= base_url('/dictionary') ?>",formdata);
     })
 
-    let myLib1 = {
+    let dictionaryComponent = {
         POST: (url,formdata) => {
             axios.post(url,formdata)
             .then((response) => {
@@ -204,16 +204,27 @@
     document.getElementById("cardCreateForm").addEventListener("submit",(e) => {
         e.preventDefault();
         let formdata= new FormData(cardCreateForm);
-        myLib2.POST("<?= base_url('/perbook') ?>",formdata);
+        cardCreateComponent.POST("<?= base_url('/perbook') ?>",formdata);
     })
 
-    let myLib2 = {
+    let cardCreateComponent = {
         POST: (url,formdata) => {
-            axios.post(url,formdata)
+            axios.post(url, formdata)
             .then((response) => {
-                window.location.href = `<?= base_url('/perbook/'.$b_id)?>`;
-            }).catch((e) => {
-                console.log(e.response.data);
+                Swal.fire({
+                    icon: 'success',
+                    title: '成功',
+                    text: '您好，即將為您重新轉跳'
+                }).then(function(result) {
+                    window.location.href = `<?= base_url('/perbook')?>`;
+                })
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: error.response.data.status + ' 錯誤',
+                    text: error.response.data.messages
+                })
             })
         },
     }

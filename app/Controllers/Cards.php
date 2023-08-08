@@ -3,15 +3,18 @@
 namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
-use App\Models\BooksModel;
 use App\Models\CardsModel;
+use App\Models\StateModel;
 
 class Cards extends BaseController
 {
     use ResponseTrait;
 
-    public function index($uuidv4)
+    public function index()
     {
+        $bookData = $this->session->bookData;
+        $uuidv4 = $bookData['uuidv4'];
+
         return redirect()->to("/perbook/" . $uuidv4);
     }
 
@@ -37,6 +40,7 @@ class Cards extends BaseController
         $part_of_speech = $data['part_of_speech'];
         $e_sentence     = $data['e_sentence'];
         $c_sentence     = $data['c_sentence'];
+        $uuidv4         = $this->getUuid();
 
         if($title === null || $content === null) {
             return $this->fail("需標題內容進行建立", 404);
@@ -56,10 +60,22 @@ class Cards extends BaseController
             'part_of_speech' => $part_of_speech,
             'e_sentence'     => $e_sentence,
             'c_sentence'     => $c_sentence,
-            'uuidv4'         => $this->getUuid(),
+            'uuidv4'         => $uuidv4,
         ];
         $cardsModel = new CardsModel();
         $cardsModel->insert($values);
+
+        $thecard = $cardsModel->where("uuidv4", $uuidv4)->first();
+        $c_id = $thecard['c_id'];
+
+        $stateModel = new StateModel();
+        $values = [
+            'u_id'  => $u_id,
+            'c_id'  => $c_id,
+            'state' => 0,
+            'grade' => "New",
+        ];
+        $stateModel->insert($values);
 
         return $this->respond([
             "status" => true,

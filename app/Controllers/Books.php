@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
 use App\Models\BooksModel;
+use App\Models\CardsModel;
 
-class BookList extends BaseController
+class Books extends BaseController
 {
     use ResponseTrait;
 
@@ -64,5 +65,33 @@ class BookList extends BaseController
             "status" => true,
             "msg"    => "書本建立成功"
         ]);
+    }
+
+    public function perBook($uuidv4)
+    {
+        $userData = $this->session->userData;
+
+        $booksModel = new BooksModel();
+        $bookData = $booksModel->where("uuidv4", $uuidv4)->first();
+
+        if($bookData === null) {
+            return redirect()->to("/books");
+        } else {
+            $this->session->set("bookData", $bookData);
+        }
+
+        $u_id = $userData['u_id'];
+        $b_id = $bookData['b_id'];
+
+        $cardsModel = new CardsModel();
+        $cardData['cards'] = $cardsModel ->join('state', 'cards.c_id = state.c_id')
+                                    ->where('cards.b_id', $b_id)
+                                    ->where('state.u_id', $u_id)
+                                    ->orderBy('cards.c_id', 'DESC')
+                                    ->findAll();
+
+        $data = array_merge($bookData, $cardData);
+
+        return view('pages/perbook_list', $data);
     }
 }

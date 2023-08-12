@@ -37,12 +37,19 @@ $routes->post('/login', 'VisitorManage::login');
 $routes->post('/register', 'VisitorManage::register');
 $routes->get('/logout', 'VisitorManage::logout');
 
+$routes->addPlaceholder('uuid', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
+
 $routes->group('/', ['filter' => 'AuthFilter'], function ($routes) {
     $routes->get('/home', 'MemberManage::index');
 
-    $routes->get('/books', 'BookList::index');
-    $routes->get('/books/new', 'BookList::renderCreatePage');
-    $routes->post('/books', 'BookList::create');
+    $routes->get('/books', 'Books::index');
+    $routes->get('/books/new', 'Books::renderCreatePage');
+    $routes->post('/books', 'Books::create');
+    $routes->get('/perbook/(:uuid)', 'Books::perBook/$1');
+
+    $routes->get('/perbook', 'Cards::index');
+    $routes->get('/perbook/new', 'Cards::renderCreatePage');
+    $routes->post('/perbook', 'Cards::create');
 });
 /*
  * --------------------------------------------------------------------

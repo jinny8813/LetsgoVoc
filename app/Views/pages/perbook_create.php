@@ -168,13 +168,16 @@
         POST: (url,formdata) => {
             axios.post(url,formdata)
             .then((response) => {
-                console.log(response.data);
-                innerMsg(response.data);
+                innerMsg(response.data.data);
                 cardCreateDict.classList.remove('d-none');
                 cardCreate.classList.remove('d-none');
                 dict.classList.remove('d-none');
-            }).catch((e) => {
-                console.log(e);
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: error.response.data.status + ' 錯誤',
+                    text: error.response.data.messages.error
+                })
             })
         },
     }

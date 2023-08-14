@@ -176,7 +176,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: error.response.data.status + ' 錯誤',
-                    text: error.response.data.messages.error
+                    text: error.response.data.messages
                 })
             })
         },

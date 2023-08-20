@@ -39,7 +39,9 @@ class Dictionary extends BaseController
         $uri = "https://api.wordnik.com/v4/word.json/" . $word . "/pronunciations?useCanonical=false&typeFormat=IPA&limit=1&api_key=" . $apiKeyWordnik;
         $response = json_decode(file_get_contents($uri));
 
-        return $response[0]->raw;
+        $pron = $response[0]->raw;
+
+        return $pron;
     }
 
     public function getWordnikDefinition($word)
@@ -94,8 +96,9 @@ class Dictionary extends BaseController
         curl_close($ch);
 
         $transText = json_decode($response);
+        $transInfo = $transText[0]->translations[0]->text;
 
-        return $transText[0]->translations[0]->text;
+        return $transInfo;
     }
 
     public function getExampleSentences($word)

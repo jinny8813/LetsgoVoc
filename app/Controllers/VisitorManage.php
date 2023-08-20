@@ -10,6 +10,11 @@ class VisitorManage extends BaseController
 {
     use ResponseTrait;
 
+    /**
+     * render visitor_home page function
+     *
+     * @return void
+     */
     public function index()
     {
         if($this->session->get("userData") !== null) {
@@ -19,7 +24,12 @@ class VisitorManage extends BaseController
         }
     }
 
-    public function login()
+    /**
+     * user login function
+     *
+     * @return object
+     */
+    public function login(): object
     {
         $data = $this->request->getPost();
 
@@ -59,13 +69,23 @@ class VisitorManage extends BaseController
         }
     }
 
+    /**
+     * user logout function
+     *
+     * @return void
+     */
     public function logout()
     {
         $this->session->destroy();
         return redirect()->to("/");
     }
 
-    public function register()
+    /**
+     * store user data to db function
+     *
+     * @return object
+     */
+    public function register(): object
     {
         $data = $this->request->getPost();
 

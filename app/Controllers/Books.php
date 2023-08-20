@@ -10,6 +10,11 @@ class Books extends BaseController
 {
     use ResponseTrait;
 
+    /**
+     * render book_list page function
+     *
+     * @return void
+     */
     public function index()
     {
         $userData = $this->session->userData;
@@ -30,12 +35,22 @@ class Books extends BaseController
         return view('pages/book_list', $data);
     }
 
+    /**
+     * render book_create page function
+     *
+     * @return void
+     */
     public function renderCreatePage()
     {
         return view('pages/book_create');
     }
 
-    public function create()
+    /**
+     * store book data to db function
+     *
+     * @return object
+     */
+    public function create(): object
     {
         $data = $this->request->getPost();
         $userData = $this->session->userData;
@@ -67,7 +82,13 @@ class Books extends BaseController
         ]);
     }
 
-    public function perBook($uuidv4)
+    /**
+     * render perbook_list page function
+     *
+     * @param string $uuidv4
+     * @return void
+     */
+    public function perBook(string $uuidv4)
     {
         $userData = $this->session->userData;
 

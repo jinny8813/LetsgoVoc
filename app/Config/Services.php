@@ -29,4 +29,8 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+    public static $aliases = [
+        // ...
+        'Dotenv' => \Config\Dotenv::class,
+    ];
 }

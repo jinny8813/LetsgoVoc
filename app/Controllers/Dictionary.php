@@ -8,7 +8,12 @@ class Dictionary extends BaseController
 {
     use ResponseTrait;
 
-    public function index()
+    /**
+     * search word info from APIs function
+     *
+     * @return object
+     */
+    public function index(): object
     {
         $data = $this->request->getPost();
         $word = $data['word'];
@@ -32,7 +37,13 @@ class Dictionary extends BaseController
         ]);
     }
 
-    public function getWordnikPronunciations($word)
+    /**
+     * search word pronunciations function
+     *
+     * @param string $word
+     * @return string
+     */
+    public function getWordnikPronunciations(string $word): string
     {
         $apiKeyWordnik = $_ENV['API_KEY_Wordnik'];
 
@@ -44,7 +55,13 @@ class Dictionary extends BaseController
         return $pron;
     }
 
-    public function getWordnikDefinition($word)
+    /**
+     * search word definition function
+     *
+     * @param string $word
+     * @return array
+     */
+    public function getWordnikDefinition(string $word): array
     {
         $apiKeyWebster = $_ENV['API_KEY_Dictionary'];
 
@@ -68,7 +85,13 @@ class Dictionary extends BaseController
         return $wordInfoArr;
     }
 
-    public function getMicrosoftTranslation($word)
+    /**
+     * search word translation function
+     *
+     * @param string $word
+     * @return string
+     */
+    public function getMicrosoftTranslation(string $word): string
     {
         $endpoint = "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=zh-Hant";
 
@@ -101,7 +124,13 @@ class Dictionary extends BaseController
         return $transInfo;
     }
 
-    public function getExampleSentences($word)
+    /**
+     * search word example sentences function
+     *
+     * @param string $word
+     * @return array
+     */
+    public function getExampleSentences(string $word): array
     {
         $endpoint = "https://api.openai.com/v1/completions";
 

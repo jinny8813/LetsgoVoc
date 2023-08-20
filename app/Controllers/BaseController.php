@@ -70,7 +70,7 @@ abstract class BaseController extends Controller
      * @param null
      * @return string
      */
-    public function getUuid($data = null):string
+    public function getUuid($data = null): string
     {
         $data = $data ?? random_bytes(16);
         assert(strlen($data) == 16);

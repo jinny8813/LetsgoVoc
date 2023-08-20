@@ -10,6 +10,11 @@ class Cards extends BaseController
 {
     use ResponseTrait;
 
+    /**
+     * redirect to perbook_list rendering function
+     *
+     * @return void
+     */
     public function index()
     {
         $bookData = $this->session->bookData;
@@ -18,6 +23,11 @@ class Cards extends BaseController
         return redirect()->to("/perbook/" . $uuidv4);
     }
 
+    /**
+     * render perbook_create page function
+     *
+     * @return void
+     */
     public function renderCreatePage()
     {
         $bookData = $this->session->bookData;
@@ -25,7 +35,12 @@ class Cards extends BaseController
         return view('pages/perbook_create', $bookData);
     }
 
-    public function create()
+    /**
+     * store card data to db function
+     *
+     * @return object
+     */
+    public function create(): object
     {
         $data = $this->request->getPost();
         $userData = $this->session->userData;
